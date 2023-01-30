@@ -30,6 +30,14 @@ public class StringCalculatorTest {
         int result = stringCalculator.add(input);
 
         assertEquals(0,result);
+    }
+    @Test
+    void addOneShouldReturnOne(){
+        String input = "1";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(1,result);
 
     }
 }

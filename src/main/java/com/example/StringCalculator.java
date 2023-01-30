@@ -6,6 +6,11 @@ public class StringCalculator {
             return 0;
         }
         String[] splittedInputs = input.split(",");
+
+        if (splittedInputs.length == 1) {
+            return Integer.parseInt(input);
+        }
+
         int convertedNumberOne = Integer.parseInt(splittedInputs[0]);
         int convertedNumberTwo = Integer.parseInt(splittedInputs[1]);
         return convertedNumberOne + convertedNumberTwo;
