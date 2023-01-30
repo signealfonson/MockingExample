@@ -7,12 +7,11 @@ public class StringCalculator {
         }
         String[] splittedInputs = input.split(",");
 
-        if (splittedInputs.length == 1) {
-            return Integer.parseInt(input);
+        int sum = 0;
+        for (String splittedInput : splittedInputs) {
+            int convertedNumber = Integer.parseInt(splittedInput);
+            sum = sum + convertedNumber;
         }
-
-        int convertedNumberOne = Integer.parseInt(splittedInputs[0]);
-        int convertedNumberTwo = Integer.parseInt(splittedInputs[1]);
-        return convertedNumberOne + convertedNumberTwo;
+        return sum;
     }
 }

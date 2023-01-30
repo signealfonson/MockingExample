@@ -40,4 +40,13 @@ public class StringCalculatorTest {
         assertEquals(1,result);
 
     }
+
+    @Test
+    void addTenOnesShouldReturnTen() {
+        String input = "1,1,1,1,1,1,1,1,1,1";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(10, result);
+    }
 }
