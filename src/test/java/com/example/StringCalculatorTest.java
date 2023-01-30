@@ -15,13 +15,21 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void addNumbersOneAndTwoAndReturnThree(){
+    void addNumbersOneAndTwoShouldReturnThree(){
         //Given
         String input = "1,2";
         //When
         int result = stringCalculator.add(input);
         //Then
         assertEquals(3,result);
+    }
+    @Test
+    void addEmptyStringShouldReturnZero(){
+        String input ="";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(0,result);
 
     }
 }
