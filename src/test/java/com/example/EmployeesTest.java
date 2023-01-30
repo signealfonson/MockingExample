@@ -5,23 +5,37 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
 
 class EmployeesTest {
-    BankService bankService = Mockito.mock(BankService.class);
-    EmployeeRepositoryImpl employeeRepository = new EmployeeRepositoryImpl();
-    Employees employees = new Employees(employeeRepository, bankService);
-    Employee e = new Employee("1", 10.0);
-    Employee f = new Employee("2", 15.0);
+    BankService bankService;
+    EmployeeRepositoryImpl employeeRepository;
+    Employees employees;
+    Employee e;
+    Employee f;
 
     @BeforeEach
     void beforeEveryTest() {
+        bankService = Mockito.mock(BankService.class);
+        employeeRepository = new EmployeeRepositoryImpl();
+        employees = new Employees(employeeRepository, bankService);
+        e = new Employee("1", 10.0);
+        f = new Employee("2", 15.0);
         employeeRepository.save(e);
         employeeRepository.save(f);
     }
     @Test
     void payEmployees() {
-        assertEquals(2,employees.payEmployees());
+        //Given
+
+        //When
+        int actual = employees.payEmployees();
+        //Then
+        verify(bankService).pay(eq("1"),anyDouble());
+        verify(bankService).pay(eq("2"),anyDouble());
+        assertEquals(2, actual);
     }
     @Test
     void controlPayment() {
