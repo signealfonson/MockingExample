@@ -86,4 +86,12 @@ public class StringCalculatorTest {
 
         assertEquals(2, result);
     }
+    @Test
+    void adjustableFormatOfDelimiter() {
+        String input = "//[***]\n1***2***3";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(6,result);
+    }
 }

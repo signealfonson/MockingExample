@@ -2,6 +2,8 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
     public int add(String input) {
@@ -9,13 +11,19 @@ public class StringCalculator {
             return 0;
         }
         String[] splittedInputs;
-        if (input.startsWith("//")){
+        Pattern pattern = Pattern.compile("\\/\\/\\[(.+)\\]\\n(.+)");
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.matches()){
+            String delimiter = matcher.group(1);
+            String numbers = matcher.group(2);
+            splittedInputs = numbers.split("\\Q" +delimiter + "\\E");
+        }else if (input.startsWith("//")){
             char delimiter = input.charAt(2);
             String delimiterToString = String.valueOf(delimiter);
             String inputNumbers = input.substring(4);
-            splittedInputs = inputNumbers.split(delimiterToString);
-        }
-        else{
+            splittedInputs = inputNumbers.split("\\Q" + delimiterToString + "\\E");
+
+        } else{
             splittedInputs = input.split(",|\n");
         }
 
