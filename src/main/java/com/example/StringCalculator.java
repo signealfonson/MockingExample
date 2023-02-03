@@ -23,6 +23,9 @@ public class StringCalculator {
         List<Integer> negativeNumbers = new ArrayList<>();
         for (String splittedInput : splittedInputs) {
             int convertedNumber = Integer.parseInt(splittedInput);
+            if(convertedNumber > 1000){
+                continue;
+            }
             sum = sum + convertedNumber;
 
             if(convertedNumber < 0){

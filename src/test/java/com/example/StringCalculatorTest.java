@@ -78,4 +78,12 @@ public class StringCalculatorTest {
         RuntimeException thrown = assertThrows(RuntimeException.class,()->stringCalculator.add("1,-2,-3"));
         assertEquals("Negatives not allowed: [-2, -3]",thrown.getMessage());
     }
+    @Test
+    void numbersLargerThan1000ShouldBeIgnored() {
+        String input = "1001,2";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(2, result);
+    }
 }
