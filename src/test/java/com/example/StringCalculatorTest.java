@@ -3,41 +3,46 @@ package com.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.assertj.core.api.ClassBasedNavigableIterableAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
 
     StringCalculator stringCalculator;
 
     @BeforeEach
-    void beforeEveryTest(){
+    void beforeEveryTest() {
         stringCalculator = new StringCalculator();
     }
 
     @Test
-    void addNumbersOneAndTwoShouldReturnThree(){
+    void addNumbersOneAndTwoShouldReturnThree() {
         //Given
         String input = "1,2";
         //When
         int result = stringCalculator.add(input);
         //Then
-        assertEquals(3,result);
+        assertEquals(3, result);
     }
+
     @Test
-    void addEmptyStringShouldReturnZero(){
-        String input ="";
+    void addEmptyStringShouldReturnZero() {
+        String input = "";
 
         int result = stringCalculator.add(input);
 
-        assertEquals(0,result);
+        assertEquals(0, result);
     }
+
     @Test
-    void addOneShouldReturnOne(){
+    void addOneShouldReturnOne() {
         String input = "1";
 
         int result = stringCalculator.add(input);
 
-        assertEquals(1,result);
+        assertEquals(1, result);
 
     }
 
@@ -48,5 +53,29 @@ public class StringCalculatorTest {
         int result = stringCalculator.add(input);
 
         assertEquals(10, result);
+    }
+
+    @Test
+    void numbersShouldBeAddedWithCommasAndNewLines() {
+        String input = "1,2\n3";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(6, result);
+    }
+
+    @Test
+    void numbersShouldBeAddedWithDifferentDelimitersIfWrittenBehindSlashSlash() {
+        String input = "//;\n1;2";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(3, result);
+    }
+
+    @Test
+    void addNegativeNumbersShouldThrowException() {
+        RuntimeException thrown = assertThrows(RuntimeException.class,()->stringCalculator.add("1,-2,-3"));
+        assertEquals("Negatives not allowed: [-2, -3]",thrown.getMessage());
     }
 }
