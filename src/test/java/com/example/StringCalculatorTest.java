@@ -102,5 +102,12 @@ public class StringCalculatorTest {
 
         assertEquals(6,result);
     }
+    @Test
+    void enableingDelimitersLongerThanOneChar() {
+        String input = "//[*%]\n1*%2";
 
+        int result = stringCalculator.add(input);
+
+        assertEquals(3,result);
+    }
 }
