@@ -94,4 +94,13 @@ public class StringCalculatorTest {
 
         assertEquals(6,result);
     }
+    @Test
+    void enableingDifferentDilimiters() {
+        String input = "//[*][%]\n1*2%3";
+
+        int result = stringCalculator.add(input);
+
+        assertEquals(6,result);
+    }
+
 }

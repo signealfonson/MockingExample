@@ -16,7 +16,9 @@ public class StringCalculator {
         if (matcher.matches()){
             String delimiter = matcher.group(1);
             String numbers = matcher.group(2);
-            splittedInputs = numbers.split("\\Q" +delimiter + "\\E");
+            String[] splittedDelimiters = delimiter.split("\\]\\[");
+            String delimiters = "\\Q" + String.join("\\E|\\Q", splittedDelimiters) + "\\E";
+            splittedInputs = numbers.split(delimiters);
         }else if (input.startsWith("//")){
             char delimiter = input.charAt(2);
             String delimiterToString = String.valueOf(delimiter);
